@@ -1,5 +1,9 @@
+
+#include "stdio.h"
 #include "opencv/cv.h"
 #include "opencv/highgui.h"
+
+using namespace std;
 
 int g_slider_position = 0;
 CvCapture* g_capture = NULL;
@@ -10,8 +14,7 @@ void onTrackbarSlide(int pos){
 
 
 IplImage* doPyrDown(IplImage* in,int filter = IPL_GAUSSIAN_5x5) {
-   // Best to make sure input image is divisible by two.
-   //
+   cout << in->width << "   " << in->height << endl ;
    assert( in->width%2 == 0 && in->height%2 == 0 );
    IplImage* out = cvCreateImage(cvSize( in->width/2, in->height/2 ),in->depth,in->nChannels);
    cvPyrDown( in, out );
@@ -33,7 +36,7 @@ int main( int argc, char** argv ) {
       frame = cvQueryFrame( g_capture );
       if( !frame ) break;
       cvShowImage( "Example5", frame );
-      cvShowImage( "Example5", doPyrDown(frame,IPL_GAUSSIAN_5x5) );
+      cvShowImage( "Example5-out", doPyrDown(frame,IPL_GAUSSIAN_5x5) );
       char c = cvWaitKey(33);
       if( c == 27 ) break;
    }
