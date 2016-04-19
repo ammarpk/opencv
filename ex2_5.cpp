@@ -14,7 +14,6 @@ void onTrackbarSlide(int pos){
 
 
 IplImage* doPyrDown(IplImage* in,int filter = IPL_GAUSSIAN_5x5) {
-   cout << in->width << "   " << in->height << endl ;
    assert( in->width%2 == 0 && in->height%2 == 0 );
    IplImage* out = cvCreateImage(cvSize( in->width/2, in->height/2 ),in->depth,in->nChannels);
    cvPyrDown( in, out );
